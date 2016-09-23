@@ -18,10 +18,10 @@
   },
   "standard": {
     "ignore": [
-      "examples"
+      "examples/**"
     ],
     "globals": [
-      "angular"
+      "angular", "$scope"
     ]
   }
 }
