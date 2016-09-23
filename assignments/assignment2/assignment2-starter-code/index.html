@@ -10,18 +10,27 @@
         color: red;
         font-size: 1.2em;
       }
+      ul {
+        padding-top: 30px;
+        padding-left: 15px;
+      }
       li {
         margin-bottom: 7px;
         font-size: 1.2em;
+        list-style: none;
+        line-height: 2
+      }
+      li:hover span.col-md-6{
+        background-color: #c7f3c3;
       }
       li > button {
-        margin-left: 6px;
+        margin-left: 0;
       }
       button > span {
         color: green;
       }
       button {
-        
+
       }
     </style>
   </head>
@@ -35,9 +44,9 @@
         <div class="col-md-6" ng-controller="ToBuyShoppingController as itemsToBuyCtrl">
          <h2>To Buy:</h2>
          <ul>
-           <li ng-repeat="item in itemsToBuyCtrl.getItems()">
-             Buy {{ item.quantity }} of {{ item.name }}
-             <button class="btn btn-default" ng-click="itemsToBuyCtrl.buyItem($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button>
+           <li class="row" ng-repeat="item in itemsToBuyCtrl.getItems()">
+               <span class="col-md-6" >Buy {{ item.quantity }} of {{ item.name }}</span>
+               <button class="btn btn-default col-md-2" ng-click="itemsToBuyCtrl.buyItem($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button>
            </li>
          </ul>
          <div class="emptyMessage" ng-if="itemsToBuyCtrl.isEmpty()">Everything is bought!</div>
