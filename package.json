@@ -1,0 +1,27 @@
+{
+  "name": "coursera-assignments",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Coursera Assignments - Angular  Course",
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-plugin-transform-async-to-generator": "^6.8.0",
+    "babel-preset-es2015": "^6.14.0",
+    "standard": "^8.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/patiboh/coursera-angular"
+  },
+  "scripts": {
+    "test": "standard && node app-tests.js"
+  },
+  "standard": {
+    "ignore": [
+      "examples"
+    ],
+    "globals": [
+      "angular"
+    ]
+  }
+}
