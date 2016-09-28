@@ -1,0 +1,10 @@
+<div>
+  <h3>Your search: {{ foundItems.searchTerm }}</h3>
+  <ol>
+    <li ng-repeat="item in foundItems.searchMenu({searchTerm: foundItems.searchTerm})">
+      {{ item }}
+      <button ng-click="foundItems.onRemove({itemIndex: $index})">Remove Item</button>
+    </li>
+  </ol>
+  <div class="error" ng-if="!foundItems.searchTerm">Nothing Found></div>
+</div>
