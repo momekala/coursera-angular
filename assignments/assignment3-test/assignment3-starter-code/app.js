@@ -12,15 +12,15 @@
    */
   function FoundItemsDirective () {
     var ddo = {
-      templateUrl: 'foundItems.html',
+      restrict: 'E',
       scope: {
-        restrict: 'E',
         searchTerm: '@',
         found: '<',
         onRemove: '&'
       },
+      templateUrl: 'foundItems.html',
       controller: FoundItemsDirectiveController,
-      controllerAs: 'foundItems',
+      controllerAs: 'items',
       bindToController: true
     }
 
@@ -28,7 +28,7 @@
   }
 
   function FoundItemsDirectiveController () {
-    var foundItemsCtrl = this
+
   }
 
 /**
@@ -36,30 +36,33 @@
  */
   NarrowItDownController.$inject = ['MenuSearchService']
   function NarrowItDownController (MenuSearchService) {
-    var foundItems = this
-    foundItems.found = []
-    foundItems.searchTerm = ''
+    var narrowDownCtrl = this
+    var searchTerm = ''
+    var menuItems = []
 
-    foundItems.searchMenu = function (searchTerm) {
-      foundItems.searchTerm = searchTerm
+    narrowDownCtrl.searchMenu = function (searchTerm) {
+      narrowDownCtrl.searchTerm = searchTerm
       if (searchTerm.trim() === '') {
-        foundItems.found = []
+        narrowDownCtrl.menuItems = []
       }
       else {
         var promise = MenuSearchService.getMatchedMenuItems(searchTerm)
         promise.then(function (response) {
-          foundItems.found = response
-          console.log(foundItems.found)
+          narrowDownCtrl.menuItems = response
         }).catch(function (error) {
           console.log(error)
         })
       }
     }
 
-    foundItems.onRemove = function (index) {
-      foundItems.found.splice(index, 1)
+    narrowDownCtrl.getItems = function () {
+      return narrowDownCtrl.menuItems
     }
-  }
+
+    narrowDownCtrl.removeItem = function (index) {
+      narrowDownCtrl.menuItems.splice(index, 1)
+    }
+}
 
 /**
  * MenuSearchService
@@ -87,17 +90,18 @@
   function MenuItemsFilter ($filter) {
     return function (items, term) {
       var filteredMenuItems = []
+      var lcTerm = $filter('lowercase')(term) /* lowercase search term & haystacks */
+      
       for (var i = 0; i < items.length; i++) {
         var itemName = $filter('lowercase')(items[i].name)
         var itemDescription = $filter('lowercase')(items[i].description)
 
-        if (itemName.includes(term) || itemDescription.includes(term)) {
+        if (itemName.includes(lcTerm) || itemDescription.includes(lcTerm)) {
           filteredMenuItems.push(items[i])
         }
       }
       return filteredMenuItems
     }
   }
-}
 
-)()
+})()
