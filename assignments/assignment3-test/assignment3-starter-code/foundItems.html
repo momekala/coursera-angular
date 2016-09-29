@@ -1,9 +1,10 @@
 
   <h3>Your search: {{ items.searchTerm }}</h3>
-  <ol class="row is-table-row">
-    <li ng-repeat="item in items.found" class="col-md-4">
+  <div ng-repeat-while="items.found" >
+  <ol class="row table-row-sm">
+    <li ng-repeat="item in items.found" class="col-sm-4">
       <h4>{{ item.name }}</h4>
       <p>{{ item.description }}</p>
-      <button ng-click="items.onRemove({index: $index})">Remove Item</button>
+      <button class="btn-remove" ng-click="items.onRemove({index: $index})">Remove Item</button>
     </li>
   </ol>
