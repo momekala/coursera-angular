@@ -7,6 +7,7 @@
     .directive('foundItems', FoundItemsDirective)
     .directive('itemsLoaderIndicator', ItemsLoaderIndicatorDirective)
     .filter('menuItems', MenuItemsFilter)
+    .constant('ClientAPI', 'https://davids-restaurant.herokuapp.com/menu_items.json')
 
   /**
    * [FoundItemsDirective description]
@@ -119,14 +120,15 @@
 /**
  * MenuSearchService
  */
-  MenuSearchService.$inject = ['$http', 'menuItemsFilter']
-  function MenuSearchService ($http, menuItemsFilter) {
+  MenuSearchService.$inject = ['$http', 'menuItemsFilter', 'ClientAPI']
+  function MenuSearchService ($http, menuItemsFilter, ClientAPI) {
     var service = this
 
     service.getMatchedMenuItems = function (searchTerm) {
       var items = $http({
         method: 'GET',
-        url: ('https://davids-restaurant.herokuapp.com/menu_items.json')
+        url: (ClientAPI),
+        cache: true
       }).then(
         function (response) {
           return menuItemsFilter(response.data.menu_items, searchTerm)
