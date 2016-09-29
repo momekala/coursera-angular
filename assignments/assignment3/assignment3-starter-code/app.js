@@ -5,65 +5,154 @@
     .controller('NarrowItDownController', NarrowItDownController)
     .service('MenuSearchService', MenuSearchService)
     .directive('foundItems', FoundItemsDirective)
+    .directive('itemsLoaderIndicator', ItemsLoaderIndicatorDirective)
+    .filter('menuItems', MenuItemsFilter)
 
   /**
    * [FoundItemsDirective description]
    */
   function FoundItemsDirective () {
     var ddo = {
-      templateUrl: 'foundItems.html',
+      restrict: 'E',
       scope: {
-        restrict: 'E',
         searchTerm: '@',
         found: '<',
-        onRemove: '&'
+        onRemove: '&',
+        searchQuery: '&',
+        nothingFound: '&'
       },
+      templateUrl: 'foundItems.html',
       controller: FoundItemsDirectiveController,
-      controllerAs: 'foundItems',
-      bindToController: true,
-      link: FoundItemsDirectiveLink,
-      transclude: true
+      controllerAs: 'items',
+      bindToController: true
     }
-
     return ddo
   }
+  function FoundItemsDirectiveController () {}
 
-  function FoundItemsDirectiveLink (scope, element, attrs, controller) {
-    var foundItemsList = this
+    /**
+     * [FoundItemsDirective description]
+     */
+  function ItemsLoaderIndicatorDirective () {
+    var ddo = {
+      restrict: 'E',
+      scope: {
+        loading: '&'
+      },
+      templateUrl: 'loader/itemsloaderindicator.template.html',
+      controller: ItemsLoaderIndicatorDirectiveController,
+      controllerAs: 'loader',
+      bindToController: true
+    }
+    return ddo
   }
-  function FoundItemsDirectiveController () {
-    var foundItemsCtrl = this
+  function ItemsLoaderIndicatorDirectiveController () {}
 
-    var listTitle = function () { }
-  }
-
+/**
+ * NarrowItDownController
+ */
   NarrowItDownController.$inject = ['MenuSearchService']
   function NarrowItDownController (MenuSearchService) {
-    var itemsBoughtCtrl = this
-    var found = []
-    var searchTerm = ''
+    var narrowDownCtrl = this
+    narrowDownCtrl.searchTerm = ''
+    narrowDownCtrl.found = []
+    narrowDownCtrl.firstVisit = true
+    narrowDownCtrl.isLoading = false
 
-    itemsBoughtCtrl.searchMenu = function (searchTerm) {
-      if (itemsBoughtCtrl.searchTerm === '') {
+    narrowDownCtrl.searchMenu = function (searchTerm) {
+      narrowDownCtrl.searchTerm = searchTerm
 
+      if (searchTerm.trim() === '') {
+        narrowDownCtrl.firstVisit = false
+        narrowDownCtrl.found = []
       }
-      MenuCategoriesService.getMatchedMenuItems(itemsBoughtCtrl.searchTerm)
+      else {
+        narrowDownCtrl.isLoading = true
+        var promise = MenuSearchService.getMatchedMenuItems(searchTerm)
+        promise.then(function (response) {
+          if (response.length === 0) {
+            narrowDownCtrl.found = []
+            narrowDownCtrl.firstVisit = false
+          }
+          narrowDownCtrl.found = response
+        }).catch(function (error) {
+          console.log(error)
+        }).finally(function () {
+          narrowDownCtrl.isLoading = false
+        })
+      }
     }
 
-    itemsBoughtCtrl.narrowDown = function (index) {
-      itemsBoughtCtrl.found.splice(index, 1)
+    narrowDownCtrl.getItems = function () {
+      return narrowDownCtrl.found
+    }
+
+    narrowDownCtrl.removeItem = function (index) {
+      narrowDownCtrl.found.splice(index, 1)
+    }
+
+    narrowDownCtrl.nothingFound = function () {
+      var nothingFound = !narrowDownCtrl.firstVisit
+        && (!narrowDownCtrl.searchTerm
+          || (narrowDownCtrl.searchTerm && !narrowDownCtrl.found.length))
+
+      return nothingFound
+    }
+
+    narrowDownCtrl.searchQuery = function () {
+      var searchQuery = narrowDownCtrl.searchTerm
+      || narrowDownCtrl.found.length
+
+      return searchQuery
+    }
+
+    narrowDownCtrl.resetForm = function () {
+      narrowDownCtrl.firstVisit = true
+      narrowDownCtrl.isLoading = false
+    }
+
+    narrowDownCtrl.loading = function () {
+      return narrowDownCtrl.isLoading
     }
   }
 
-  MenuSearchService.$inject = ['$http']
-  function MenuSearchService ($http) {
+/**
+ * MenuSearchService
+ */
+  MenuSearchService.$inject = ['$http', 'menuItemsFilter']
+  function MenuSearchService ($http, menuItemsFilter) {
     var service = this
 
     service.getMatchedMenuItems = function (searchTerm) {
-      var response = $http({
+      var items = $http({
+        method: 'GET',
         url: ('https://davids-restaurant.herokuapp.com/menu_items.json')
-      })
-      return response
+      }).then(
+        function (response) {
+          return menuItemsFilter(response.data.menu_items, searchTerm)
+        })
+      return items
+    }
+  }
+
+/**
+ * MenuItemsFilter
+ */
+  MenuItemsFilter.$inject = ['$filter']
+  function MenuItemsFilter ($filter) {
+    return function (items, query) {
+      var filteredMenuItems = []
+      var term = $filter('lowercase')(query) /* lowercase search term & haystacks */
+
+      for (var i = 0; i < items.length; i++) {
+        var itemName = $filter('lowercase')(items[i].name)
+        var itemDescription = $filter('lowercase')(items[i].description)
+
+        if (itemName.includes(term) || itemDescription.includes(term)) {
+          filteredMenuItems.push(items[i])
+        }
+      }
+      return filteredMenuItems
     }
   }
 })()
