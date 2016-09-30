@@ -66,15 +66,11 @@
       if (searchTerm.trim() === '') {
         narrowDownCtrl.firstVisit = false
         narrowDownCtrl.found = []
-      }
-      else {
+      } else {
         narrowDownCtrl.isLoading = true
         var promise = MenuSearchService.getMatchedMenuItems(searchTerm)
         promise.then(function (response) {
-          if (response.length === 0) {
-            narrowDownCtrl.found = []
-            narrowDownCtrl.firstVisit = false
-          }
+          narrowDownCtrl.firstVisit = false
           narrowDownCtrl.found = response
         }).catch(function (error) {
           console.log(error)
@@ -93,17 +89,14 @@
     }
 
     narrowDownCtrl.nothingFound = function () {
-      var nothingFound = !narrowDownCtrl.firstVisit
-        && (!narrowDownCtrl.searchTerm
-          || (narrowDownCtrl.searchTerm && !narrowDownCtrl.found.length))
-
+      var nothingFound = !narrowDownCtrl.firstVisit &&
+          (!narrowDownCtrl.searchTerm ||
+          (narrowDownCtrl.searchTerm && !narrowDownCtrl.found.length))
       return nothingFound
     }
 
     narrowDownCtrl.searchQuery = function () {
-      var searchQuery = narrowDownCtrl.searchTerm
-      || narrowDownCtrl.found.length
-
+      var searchQuery = narrowDownCtrl.searchTerm || narrowDownCtrl.found.length
       return searchQuery
     }
 
@@ -150,7 +143,7 @@
         var itemName = $filter('lowercase')(items[i].name)
         var itemDescription = $filter('lowercase')(items[i].description)
 
-        if (itemName.includes(term) || itemDescription.includes(term)) {
+        if (itemName.includes(term) || itemDescription.includes(term)) {
           filteredMenuItems.push(items[i])
         }
       }
