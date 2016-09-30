@@ -71,7 +71,7 @@
         var promise = MenuSearchService.getMatchedMenuItems(searchTerm)
         promise.then(function (response) {
           narrowDownCtrl.firstVisit = false
-          narrowDownCtrl.found = response
+          narrowDownCtrl.found = Array.from(response)
         }).catch(function (error) {
           console.log(error)
         }).finally(function () {
@@ -90,8 +90,9 @@
 
     narrowDownCtrl.nothingFound = function () {
       var nothingFound = (!narrowDownCtrl.firstVisit &&
-          (narrowDownCtrl.searchTerm && !narrowDownCtrl.found.length)) ||
-          (!narrowDownCtrl.firstVisit && !narrowDownCtrl.searchTerm)
+          narrowDownCtrl.searchTerm !== '' &&
+          narrowDownCtrl.found.length === 0) ||
+          (!narrowDownCtrl.firstVisit && narrowDownCtrl.searchTerm === '' && narrowDownCtrl.found.length === 0)
       return nothingFound
     }
 
