@@ -89,9 +89,9 @@
     }
 
     narrowDownCtrl.nothingFound = function () {
-      var nothingFound = !narrowDownCtrl.firstVisit &&
-          (!narrowDownCtrl.searchTerm ||
-          (narrowDownCtrl.searchTerm && !narrowDownCtrl.found.length))
+      var nothingFound = (!narrowDownCtrl.firstVisit &&
+          (narrowDownCtrl.searchTerm && !narrowDownCtrl.found.length)) ||
+          (!narrowDownCtrl.firstVisit && !narrowDownCtrl.searchTerm)
       return nothingFound
     }
 
