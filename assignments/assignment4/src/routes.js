@@ -21,9 +21,9 @@
     .state('categories', {
       url: '/categories',
       templateUrl: 'menuApp/templates/categories.template.html',
-      controller: 'MenuCategoriesController as categoriesCtrl',
+      controller: 'MenuCategoriesController as categories',
       resolve: {
-        categories: ['MenuCategoriesService', function (MenuCategoriesService) {
+        list: ['MenuCategoriesService', function (MenuCategoriesService) {
           return MenuCategoriesService.getCategories()
         }]
       }
@@ -31,9 +31,14 @@
 
     // Category Items View
     .state('categories.items', {
-      url: '/categories/{categoryName}',
-      templateUrl: 'menuApp/templates/category-items.template.html',
-      controller: 'MenuCategoryItemsController as categoryItemsCtrl'
+      url: '/categories/{categoryId}',
+      templateUrl: 'menuApp/templates/categoryItems.template.html',
+      controller: 'MenuCategoryItemsController as categoryItem',
+      resolve: {
+        items: ['MenuCategoryItemsService', 'categoryId', function (MenuCategoryItemsService, categoryId) {
+          return MenuCategoryItemsService.getItemsForCategory(categoryId)
+        }]
+      }
     })
   }
 })()

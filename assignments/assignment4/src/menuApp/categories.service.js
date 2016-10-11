@@ -2,26 +2,26 @@
   'use strict'
 
   angular.module('MenuApp')
-  .constant('ClientAPI', 'https://davids-restaurant.herokuapp.com/menu_items.json')
+  .constant('ClientAPI', 'https://davids-restaurant.herokuapp.com/categories.json')
   .service('MenuCategoriesService', MenuCategoriesService)
 
   MenuCategoriesService.$inject = ['$http', 'ClientAPI']
   function MenuCategoriesService ($http, ClientAPI) {
     var service = this
-    var categories = []
+    var list = []
 
     service.getCategories = function () {
-      var items = $http({
+      var list = $http({
         method: 'GET',
         url: (ClientAPI),
         cache: true
       }).then(
         function (response) {
-          service.categories = response.data
-          console.log(response.data)
-          return response.data
+          service.list = response.data
+          return service.list
         })
-      return categories /* items is a promise */
+
+      return list /* this a promise */
     }
   }
 })()

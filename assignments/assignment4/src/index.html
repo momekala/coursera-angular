@@ -9,9 +9,10 @@
   <body class="container">
     <h1>Welcome to our Restaurant</h1>
 
-    <ui-view></ui-view>
+    <ui-view>
+        <spinner></spinner>
+    </ui-view>
 
-    <spinner></spinner>
 
     <!-- Libraries -->
     <script src="lib/angular.min.js"></script>
@@ -25,10 +26,11 @@
     <script src="routes.js"></script>
 
     <!-- 'MenuApp' module artifacts -->
-    <script src="menuApp/categories.component.js"></script>
-    <script src="menuApp/categories.controller.js"></script>
+    <script src="menuApp/menuCategories.component.js"></script>
+    <script src="menuApp/menuCategories.controller.js"></script>
     <script src="menuApp/categories.service.js"></script>
-    <script src="menuApp/category-items.controller.js"></script>
+    <script src="menuApp/categoryItems.controller.js"></script>
+    <script src="menuApp/categoryItems.service.js"></script>
 
     <!-- 'Spinner' module artifacts -->
     <script src="spinner/spinner.component.js"></script>
