@@ -8,8 +8,8 @@
   MenuDataService.$inject = ['$http', 'ClientAPI']
   function MenuDataService ($http, ClientAPI) {
     var service = this
-    var list = []
-    var items = []
+    service.list = []
+    service.items = []
 
     service.getAllCategories = function () {
       var list = $http({
@@ -25,10 +25,10 @@
       return list /* this a promise */
     }
 
-    service.getItemsForCategory = function (categoryId) {
+    service.getItemsForCategory = function (categoryShortName) {
       var items = $http({
         method: 'GET',
-        url: (ClientAPI + 'categories.json'),
+        url: (ClientAPI + 'menu_items.json?category=' + categoryShortName),
         cache: true
       }).then(
         function (response) {

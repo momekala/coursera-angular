@@ -31,11 +31,12 @@
 
     // Category Items View
     .state('categories.items', {
-      url: '/{categoryShortName}',
-      templateUrl: 'menuApp/templates/categoryItems.template.html',
+      url: '/items/category-{categoryShortName}',
+      templateUrl: 'menuApp/templates/allItems.template.html',
+      controller: 'ItemsController as categoryItems',
       resolve: {
-        items: ['MenuDataService', 'categoryShortName', function (MenuDataService, categoryShortName) {
-          return MenuDataService.getItemsForCategory(categoryShortName)
+        items: ['MenuDataService', '$stateParams', function (MenuDataService, $stateParams) {
+          return MenuDataService.getItemsForCategory($stateParams.categoryShortName)
         }]
       }
     })
