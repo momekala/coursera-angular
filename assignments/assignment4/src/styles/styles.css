@@ -108,3 +108,15 @@ input[type="text"] {
     bottom: 20px;
   }
 }
+
+li {
+  padding: .35em 1em;
+}
+.col-xs-4 li:hover {
+  color: white;
+  background-color: #666;
+}
+.col-xs-6 li:hover {
+  color: white;
+  background-color: #666;
+}
