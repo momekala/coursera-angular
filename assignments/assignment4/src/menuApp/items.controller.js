@@ -4,8 +4,8 @@
   angular.module('MenuApp')
   .controller('ItemsController', ItemsController)
 
-  ItemsController.$inject = ['MenuDataService', '$stateParams', 'list', 'items']
-  function ItemsController (MenuDataService, $stateParams, list, items) {
+  ItemsController.$inject = ['$stateParams', 'list', 'items']
+  function ItemsController ($stateParams, list, items) {
     var categoryItems = this
     categoryItems.items = items.menu_items
     var category = list.filter((item) => { return item.short_name === $stateParams.categoryShortName })
