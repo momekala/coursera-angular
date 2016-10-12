@@ -2,15 +2,15 @@
   'use strict'
 
   angular.module('MenuApp')
-  .controller('MenuCategoryItemsController', MenuCategoryItemsController)
+  .controller('CategoryItemsController', CategoryItemsController)
 
-  MenuCategoryItemsController.$inject = ['$stateParams', 'list']
-  function MenuCategoryItemsController ($stateParams, list) {
-    var categoryItem = this
+  CategoryItemsController.$inject = ['$stateParams', 'list']
+  function CategoryItemsController ($stateParams, list) {
+    var categoryItems = this
     var category = list.filter((item) => { return item.id == $stateParams.categoryId })
 
-    categoryItem.name = category[0].name
-    categoryItem.id = category[0].id
-    categoryItem.url = category[0].url
+    categoryItems.name = category[0].name
+    categoryItems.id = category[0].id
+    categoryItems.url = category[0].url
   }
 })()

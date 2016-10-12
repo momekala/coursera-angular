@@ -25,20 +25,17 @@
       resolve: {
         list: ['MenuCategoriesService', function (MenuCategoriesService) {
           return MenuCategoriesService.getCategories()
+        }],
+        categoryItems: ['MenuCategoriesService', 'categoryId', function (MenuCategoriesService, categoryId) {
+          return MenuCategoriesService.getItemsForCategory(categoryId)
         }]
       }
     })
 
     // Category Items View
     .state('categories.items', {
-      url: '/categories/{categoryId}',
-      templateUrl: 'menuApp/templates/categoryItems.template.html',
-      controller: 'MenuCategoryItemsController as categoryItem',
-      resolve: {
-        items: ['MenuCategoryItemsService', 'categoryId', function (MenuCategoryItemsService, categoryId) {
-          return MenuCategoryItemsService.getItemsForCategory(categoryId)
-        }]
-      }
+      url: '/{categoryId}',
+      templateUrl: 'menuApp/templates/categoryItems.template.html'
     })
   }
 })()
