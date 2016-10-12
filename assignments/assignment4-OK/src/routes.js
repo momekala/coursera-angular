@@ -24,18 +24,18 @@
       controller: 'MenuDataController as categories',
       resolve: {
         list: ['MenuDataService', function (MenuDataService) {
-          return MenuDataService.getCategories()
+          return MenuDataService.getAllCategories()
         }]
       }
     })
 
     // Category Items View
     .state('categories.items', {
-      url: '/categories/{categoryId}',
+      url: '/{categoryShortName}',
       templateUrl: 'menuApp/templates/categoryItems.template.html',
       resolve: {
-        items: ['MenuDataService', 'categoryId', function (MenuDataService, categoryId) {
-          return MenuDataService.getItemsForCategory(categoryId)
+        items: ['MenuDataService', 'categoryShortName', function (MenuDataService, categoryShortName) {
+          return MenuDataService.getItemsForCategory(categoryShortName)
         }]
       }
     })

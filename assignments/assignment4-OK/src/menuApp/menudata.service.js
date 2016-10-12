@@ -2,7 +2,7 @@
   'use strict'
 
   angular.module('Data')
-  .constant('ClientAPI', 'https://davids-restaurant.herokuapp.com/categories.json')
+  .constant('ClientAPI', 'https://davids-restaurant.herokuapp.com/')
   .service('MenuDataService', MenuDataService)
 
   MenuDataService.$inject = ['$http', 'ClientAPI']
@@ -11,10 +11,10 @@
     var list = []
     var items = []
 
-    service.getCategories = function () {
+    service.getAllCategories = function () {
       var list = $http({
         method: 'GET',
-        url: (ClientAPI),
+        url: (ClientAPI + 'categories.json'),
         cache: true
       }).then(
         function (response) {
@@ -28,7 +28,7 @@
     service.getItemsForCategory = function (categoryId) {
       var items = $http({
         method: 'GET',
-        url: (ClientAPI),
+        url: (ClientAPI + 'categories.json'),
         cache: true
       }).then(
         function (response) {
