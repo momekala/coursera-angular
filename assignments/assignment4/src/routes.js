@@ -20,22 +20,25 @@
     // Categories View
     .state('categories', {
       url: '/categories',
-      templateUrl: 'menuApp/templates/categories.template.html',
-      controller: 'MenuCategoriesController as categories',
+      templateUrl: 'menuApp/templates/allCategories.template.html',
+      controller: 'MenuDataController as categories',
       resolve: {
-        list: ['MenuCategoriesService', function (MenuCategoriesService) {
-          return MenuCategoriesService.getCategories()
-        }],
-        categoryItems: ['MenuCategoriesService', 'categoryId', function (MenuCategoriesService, categoryId) {
-          return MenuCategoriesService.getItemsForCategory(categoryId)
+        list: ['MenuDataService', function (MenuDataService) {
+          return MenuDataService.getAllCategories()
         }]
       }
     })
 
     // Category Items View
     .state('categories.items', {
-      url: '/{categoryId}',
-      templateUrl: 'menuApp/templates/categoryItems.template.html'
+      url: '/items/category-{categoryShortName}',
+      templateUrl: 'menuApp/templates/allItems.template.html',
+      controller: 'ItemsController as categoryItems',
+      resolve: {
+        items: ['MenuDataService', '$stateParams', function (MenuDataService, $stateParams) {
+          return MenuDataService.getItemsForCategory($stateParams.categoryShortName)
+        }]
+      }
     })
   }
 })()

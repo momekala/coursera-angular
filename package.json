@@ -22,7 +22,8 @@
     ],
     "globals": [
       "angular",
-      "$scope"
+      "$scope",
+      "*Ctrl"
     ]
   }
 }

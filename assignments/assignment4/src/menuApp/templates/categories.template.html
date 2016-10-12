@@ -1,5 +1,5 @@
-<a ui-sref="home">Home</a> &gt; <span>Menu Categories</span>
-
-<h3>Menu Categories</h3>
-
-<menu-categories list="categories.list"></menu-categories>
+<ul>
+  <li ng-repeat="category in $ctrl.list" ui-sref="categories.items({categoryShortName:category.short_name})">
+    {{ category.name }}
+  </li>
+</ul>
