@@ -3,7 +3,7 @@ Module 3 Coding Assignment
 
 ## Assignment Instructions Summary
 
-Build a simplified search form to search the descriptions of a restaurant menu items. Once the list of matches of the search is found, enable the user to throw away the items they don't want, in order to narrow down the menu (caching is not required).
+Build a simplified search form to search the descriptions of a restaurant menu items (ex. search "soup", "beef", "noodles", etc). Once the list of matches of the search is found, enable the user to throw away the items they don't want, in order to narrow down the menu (caching is not required).
 
 * Use the restaurant server REST API we used in Lecture 25, Part 2. to retrieve the menu data 
 * Create a text box and a button with the label "Narrow It Down For Me!".
