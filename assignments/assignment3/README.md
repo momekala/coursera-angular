@@ -14,6 +14,7 @@ Build a simplified search form to search the descriptions of a restaurant menu i
 * For each item, provide a "Don't want this one!" button to enable the user to remove an item from the list.
 * If nothing is found as a result of the search OR if the user and clicks the "Narrow It Down For Me!" button with an empty textbox, you should simply display the message "Nothing found".
 
+------------------
 
 [Click here to SIGN UP for the ***Single Page Web Applications with AngularJS*** course on Coursera](https://www.coursera.org/learn/single-page-web-apps-with-angularjs). It's FREE!
 
