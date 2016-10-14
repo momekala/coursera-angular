@@ -1,5 +1,21 @@
 Module 2 Coding Assignment
 =======
+
+## Assignment Instructions Summary
+
+Create an application that allows you to "check off" from your shopping list you've already bought, except instead of deleting them completely the item simply moves to the "Already Bought" list.
+
+* Your HTML page should display 2 lists, one titled "To Buy" and the other "Already Bought".
+* The "To Buy" list should be pre-populated with a list of at least 5 items.
+* Each shopping list item has to have a name and quantity. It should be displayed to the user in the format of `Buy item_quantity item_name`.
+* Next to each item in the list should be a button with the label "Bought".
+* When the user clicks on the "Bought" button, its associated item should be removed from the "To Buy" list and appear in the "Already Bought" list.
+* The "Already Bought" list should initially be empty and display a message "Nothing bought yet". The message must appear *only* when the list is empty. 
+* Once something is "bought" and appears on the "Already Bought" list, the format of each item in the list should be `Bought item_quantity item_name`. 
+* Once the user "buys" every item on the "To Buy" list,, display the message "Everything is bought!"
+
+------------------
+
 [Click here to SIGN UP for the ***Single Page Web Applications with AngularJS*** course on Coursera](https://www.coursera.org/learn/single-page-web-apps-with-angularjs). It's FREE!
 
 **Ready to implement some cool dynamic behavior right in your web page?! Oh, and do it in an architecturally correct/elegant way?!**
