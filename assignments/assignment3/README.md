@@ -1,5 +1,20 @@
 Module 3 Coding Assignment
 =======
+
+## Assignment Instructions Summary
+
+Build a simplified search form to search the descriptions of a restaurant menu items. Once the list of matches of the search is found, enable the user to throw away the items they don't want, in order to narrow down the menu (caching is not required).
+
+* Use the restaurant server REST API we used in Lecture 25, Part 2. to retrieve the menu data 
+* Create a text box and a button with the label "Narrow It Down For Me!".
+* Initially, the user should see the textbox and the "Narrow It Down For Me!" button.
+* Once the user enters a search term and clicks the button, retrieve the list of menu items for the entire menu.
+* Filter the menu items that martch the search and diplay the results to the user
+* Each item in the list should show the name of the menu item, its short_name, and the description.
+* For each item, provide a "Don't want this one!" button to enable the user to remove an item from the list.
+* If nothing is found as a result of the search OR if the user and clicks the "Narrow It Down For Me!" button with an empty textbox, you should simply display the message "Nothing found".
+
+
 [Click here to SIGN UP for the ***Single Page Web Applications with AngularJS*** course on Coursera](https://www.coursera.org/learn/single-page-web-apps-with-angularjs). It's FREE!
 
 **Time to put all that knowledge to code!**
