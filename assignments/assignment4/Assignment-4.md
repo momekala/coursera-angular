@@ -1,5 +1,19 @@
 Module 4 Coding Assignment
 =======
+
+## Assignment Instructions Summary
+
+Create an application with 3 views: home (`home`), categories list (`categories`), items list (`items`), using the restaurant menu REST API to create a master/detail view pair.
+
+* When the user goes to `/` path in the application, should the home screen(it can just say "Welcome to our Restaurant")
+* The home screen should have a link to a list of categories of menu items in the restaurant.
+* The link in the home page should take the user to the `/categories` view.
+* The categories view must list all available categories of items on the menu.
+* Each category item should be a link that takes take the user to the `/items` view. 
+* If the user copies a URL from the app and pastes it into a new tab or a different browser, the view should be the same as the original one
+
+-----------------------
+
 [Click here to SIGN UP for the ***Single Page Web Applications with AngularJS*** course on Coursera](https://www.coursera.org/learn/single-page-web-apps-with-angularjs). It's FREE!
 
 **Time to code something cool! Yay!!!**
