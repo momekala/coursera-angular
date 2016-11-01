@@ -18,7 +18,8 @@
   },
   "standard": {
     "ignore": [
-      "examples/**"
+      "examples/**",
+      "assignments/assignment5/**"
     ],
     "globals": [
       "angular",
