@@ -1,5 +1,5 @@
   <div class="container" ng-controller="SignUpController as signUpCtrl">
-    <form name="signUpForm" novalidate class="signUpForm">
+    <form name="signUpForm" novalidate class="signUpForm" ng-hide="signUpForm.$submitted && signUpCtrl.saved">
       <div  class="row">
         <div class="col-xs-12 col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-2">
 
@@ -15,7 +15,7 @@
 
           <fieldset>
             <label for="lastname">Last Name</label>
-            <span class="error-msg" ng-if="signUpForm.firstname.$invalid && signUpForm.firstname.$touched">
+            <span class="error-msg" ng-if="signUpForm.lastname.$invalid && signUpForm.lastname.$touched">
               Please enter your last name
             </span>
             <input type="text" name="lastname" placeholder="your last name"
@@ -27,7 +27,7 @@
 
           <fieldset>
             <label for="email">Email</label>
-            <span class="error-msg" ng-if="signUpForm.firstname.$invalid && signUpForm.firstname.$touched">
+            <span class="error-msg" ng-if="signUpForm.email.$invalid && signUpForm.email.$touched">
               Please enter a valid email address
             </span>
             <input type="email" name="email" placeholder="youremail@example.com"
@@ -37,7 +37,7 @@
 
           <fieldset>
             <label for="phone">Phone Number</label>
-            <span class="error-msg" ng-if="signUpForm.firstname.$invalid && signUpForm.firstname.$touched">
+            <span class="error-msg" ng-if="signUpForm.phone.$invalid && signUpForm.phone.$touched">
               Please enter a valid phone number
             </span>
             <input type="text" name="phone" placeholder="your phone number: ###-###-####"
@@ -48,11 +48,15 @@
         </div>
       </div>
       <div  class="row">
-        <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-2 col-md-offset-2">
-          <label for="favmenuitem">Favourite Dish</label>
-          <input type="text" name="favmenuitem" placeholder="menu short-name"
-            ng-model="signUpCtrl.user.favmenuitem"
-            required>
+        <div class="col-xs-12 col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-2">
+          <fieldset>
+            <label for="favmenuitem">Favourite Dish</label>
+            <span class="error-msg" ng-if="signUpForm.$submitted && !signUpCtrl.saved">
+              Sorry, no such menu number exists
+            </span>
+            <input type="text" name="favmenuitem" placeholder="menu short-name"
+              ng-model="signUpCtrl.user.favmenuitem">
+          </fieldset>
         </div>
         <div class="col-xs-12 submit">
           <button
@@ -61,4 +65,11 @@
         </div>
       </div>
     </form>
+
+
+    <div class="row" ng-if="signUpForm.$submitted && signUpCtrl.saved">
+      <div class="col-xs-12">
+        <p class="text-center success">Your information has been saved!</p>
+      </div>
+    </div>
   </div>
