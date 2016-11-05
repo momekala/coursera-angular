@@ -10,6 +10,7 @@ function MyInfoService($http, ApiPath, $filter) {
   var service = this;
   service.user = {};
   service.menuItem = {};
+  service.saved = false;
 
   service.getUserInfo = function () {
     return service.user;
@@ -30,6 +31,11 @@ function MyInfoService($http, ApiPath, $filter) {
 
   service.getMenuItem = function () {
       return service.menuItem;
+  };
+  service.isSaved = function () {
+
+    return  service.saved;
+
   };
 }
 })();

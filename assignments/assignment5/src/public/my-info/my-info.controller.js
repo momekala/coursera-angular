@@ -2,10 +2,10 @@
 "use strict";
 
 angular.module('public')
-.controller('SignUpController', SignUpController);
+.controller('MyInfoController', MyInfoController);
 
-SignUpController.$inject = ['MyInfoService'];
-function SignUpController(MyInfoService) {
+MyInfoController.$inject = ['MyInfoService'];
+function MyInfoController(MyInfoService) {
   var $ctrl = this;
   $ctrl.saved = false;
   $ctrl.user = {};
@@ -17,11 +17,11 @@ function SignUpController(MyInfoService) {
     menuItem.then(function (response) {
       $ctrl.menuItem = MyInfoService.getMenuItem();
       $ctrl.user = MyInfoService.getUserInfo();
-      $ctrl.saved =  MyInfoService.isSaved();
+      $ctrl.saved = true;
     })
     .catch((err) => {
       $ctrl.user = MyInfoService.getUserInfo();
-      $ctrl.saved = MyInfoService.isSaved();
+      $ctrl.saved = false;
     })
   };
 }
