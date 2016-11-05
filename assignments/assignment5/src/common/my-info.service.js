@@ -33,9 +33,7 @@ function MyInfoService($http, ApiPath, $filter) {
       return service.menuItem;
   };
   service.isSaved = function () {
-
     return  service.saved;
-
   };
 }
 })();

@@ -51,11 +51,11 @@
         <div class="col-xs-12 col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-2">
           <fieldset>
             <label for="favmenuitem">Favourite Dish</label>
-            <span class="error-msg" ng-if="signUpForm.$submitted && !signUpCtrl.saved">
+            <span class="error-msg" ng-if="signUpForm.$submitted && !signUpCtrl.menuItemOK">
               Sorry, no such menu number exists
             </span>
             <input type="text" name="favmenuitem" placeholder="menu short-name"
-              ng-model="signUpCtrl.user.favmenuitem">
+              ng-model="signUpCtrl.user.favmenuitem" ng-blur="signUpCtrl.checkMenuItem(signUpCtrl.user.favmenuitem)">
           </fieldset>
         </div>
         <div class="col-xs-12 submit">

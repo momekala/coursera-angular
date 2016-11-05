@@ -1,10 +1,18 @@
-<div class="col-xs-12">
+<div class="col-xs-12 col-sm-3 col-sm-offset-2">
     <h3>My Info</h3>
     <p>{{$ctrl.firstname}}</p>
     <p>{{$ctrl.lastname}}</p>
     <p>{{$ctrl.email}}</p>
     <p>{{$ctrl.phone}}</p>
-    <div><img scr="{{$ctrl.favedish.name}}"/></div>
-    <p>{{$ctrl.favedish.name}}</p>
-    <p>{{$ctrl.favedish.description}}</p>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <h3>My Favourite Menu</h3>
+    <div class="menu-item-photo">
+      <div>{{$ctrl.favedish.short_name}}</div>
+      <img class="img-responsive" width="250" height="150" ng-src="{{$ctrl.basePath}}/images/menu/{{$ctrl.favedish.short_name}}.jpg" alt="{{$ctrl.favedish.name}}">
+    </div>
+    <div class="menu-item-description">
+      <h3 class="menu-item-title">{{$ctrl.favedish.name}}</h3>
+      <p class="menu-item-details">{{$ctrl.favedish.description}}</p>
+    </div>
   </div>

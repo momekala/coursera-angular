@@ -1,4 +1,5 @@
-<div class="row" ng-controller="SignUpController as myInfoCtrl">
+<div class="container">
+<div class="row" ng-controller="MyInfoController as myInfoCtrl">
 
   <my-info ng-show="myInfoCtrl.saved"
     firstname="myInfoCtrl.user.firstname"
@@ -22,4 +23,5 @@
     <h3 class="text-center">Not signed up yet.</h3>
     <p class="text-center"><a ui-sref="public.signup">Sign up now!</a></p>
   </div>
+</div>
 </div>
