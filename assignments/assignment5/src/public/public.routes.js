@@ -47,17 +47,7 @@ function routeConfig ($stateProvider) {
     })
     .state('public.myinfo', {
       url: '/my-info',
-      templateUrl: 'src/public/my-info/my-info.html',
-      controller: 'SignUpController',
-      controllerAs: 'myInfoCtrl',
-      resolve: {
-        user: ['MyInfoService', function (MyInfoService) {
-          return MyInfoService.getUserInfo();
-        }],
-        favedish: ['MyInfoService', function (MyInfoService) {
-          return MyInfoService.getMenuItem();
-        }]
-      }
+      templateUrl: 'src/public/my-info/my-info.html'
     });
 }
 })();
