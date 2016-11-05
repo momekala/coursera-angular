@@ -35,10 +35,5 @@ function MyInfoService($http, ApiPath, $filter) {
   service.isSaved = function () {
     return  service.saved;
   };
-
-  service.getImgPath = function () {
-    return service.menuItem.short_name.replace(/\D/g,'');
-  };
-
 }
 })();
